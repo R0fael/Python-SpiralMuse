@@ -120,7 +120,7 @@ def draw_spiral(sides, colorselect, colordrift):
 
 window = tk.Tk()
 window.title('Spiral Control')
-window.geometry('640x880')
+window.geometry('850x800')
 window.configure(bg=wincolor)
 
 # tkinter Configuration
@@ -135,7 +135,7 @@ frame_descript = tk.Frame(window,
                        bg=bgcolor2,
                        padx=10, pady=5,
                        relief=tk.RIDGE, borderwidth=5)
-frame_descript.grid(row=0, column=0, padx=10, pady=10)
+frame_descript.grid(row=0, column=0, padx=10, pady=(10,0), sticky=tk.N)
 
 tk.Label(frame_descript,
          text='Spiral Muse', bg=bgcolor2, height=1,      # height in lines, not pixels
@@ -162,7 +162,7 @@ description2 = (
 mess_descript1 = tk.Message(master=frame_descript,
             text=description1,
             bg=bgcolor2,
-            width=300,
+            width=500,
             padx=5)
 mess_descript1.grid(row=1)
 
@@ -173,7 +173,7 @@ tk.Label(frame_descript,
 mess_descript2 = tk.Message(master=frame_descript,
             text=description2,
             bg=bgcolor2,
-            width=300,
+            width=500,
             padx=5)
 mess_descript2.grid(row=3)
 
@@ -196,7 +196,7 @@ sidemessage = ('How many sides would you like for the base polygon? '
 mess1 = tk.Message(master=frame_sides,
             text=sidemessage,
             bg=bgcolor2,
-            width=300,
+            width=500,
             padx=5)
 mess1.grid(row=1, columnspan=2)
 
@@ -237,7 +237,7 @@ driftmessage = ('Determine color stability.  Select the amount to which the spir
 mess3 = tk.Message(master=frame_drift,
                    text=driftmessage,
                    bg=bgcolor2,
-                   width=300,
+                   width=500,
                    padx=5)
 mess3.grid(row=1, columnspan=2)
 
@@ -264,7 +264,7 @@ colorselect = 'medium purple'
 frame_colorselect = tk.Frame(window,
                             bg=bgcolor2,
                              padx=10, pady=25, relief=tk.RIDGE, borderwidth=5)
-frame_colorselect.grid(row=0, column=1, rowspan=3, pady=10)
+frame_colorselect.grid(row=0, column=1, rowspan=4, pady=(10,0))
 tk.Label(frame_colorselect,
          text='Base Polygon Color', bg=bgcolor2, height=1,     # height in lines, not pixels
          pady=5,
@@ -299,7 +299,7 @@ frame_proceed = tk.Frame(window,
                          bg=bgcolor2,
                          padx=10, pady=5,
                          relief=tk.RIDGE, borderwidth=5)
-frame_proceed.grid(row=3, columnspan=2, pady=0)
+frame_proceed.grid(row=3, column=0, pady=0)
 
 tk.Label(frame_proceed,
          text='Proceed with Drawing?', bg=bgcolor2, height=1,     # height in lines, not pixels
