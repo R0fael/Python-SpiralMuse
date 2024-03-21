@@ -188,8 +188,8 @@ frame_sides = tk.Frame(window,
 frame_sides.grid(row=1, column=0, padx=10, pady=0)
 tk.Label(frame_sides,
          text='Base Polygon Sides', bg=bgcolor2, height=1,      # height in lines, not pixels
-         pady=5,
-         font=font1).grid(row=0, columnspan=2)
+         padx=10, pady=5,
+         font=font1).grid(row=0, column=0, sticky=tk.E)
 sidemessage = ('How many sides would you like for the base polygon? '
                'Select a number from 3 to 10.'
 )
@@ -212,7 +212,7 @@ sides_entry = tk.Entry(frame_sides, width=2)
 sides_entry.insert(0, str(sides))
 ##sides_btn = tk.Button(frame_sides, text='Submit', command=sides_submit)
 
-sides_entry.grid(row=2, column=0, sticky='E')
+sides_entry.grid(row=0, column=1, sticky='W')
 ##sides_btn.grid(row=2, column=1)
 
 
@@ -227,8 +227,8 @@ frame_drift = tk.Frame(window,
 frame_drift.grid(row=2, column=0, padx=10, pady=0)
 tk.Label(frame_drift,
          text='Color Drift', bg=bgcolor2, height=1,     # height in lines, not pixels
-         pady=5,
-         font=font1).grid(row=0, columnspan=2)
+         padx=10, pady=5,
+         font=font1).grid(row=0, column=0, sticky=tk.E)
 driftmessage = ('Determine color stability.  Select the amount to which the spiral color '
                 'is prevented from '
                 'drifting away from the base color, where 8 represents a lot of stability '
@@ -252,7 +252,7 @@ drift_entry = tk.Entry(frame_drift, width=2)
 drift_entry.insert(0, str(colordrift))
 ##drift_btn = tk.Button(frame_drift, text='Submit', command=drift_submit)
 
-drift_entry.grid(row=2, column=0, sticky='E')
+drift_entry.grid(row=0, column=1, sticky='W')
 ##drift_btn.grid(row=2, column=1)
 
 
