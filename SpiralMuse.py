@@ -55,7 +55,7 @@ wincolor = 'azure2'
 
 ##### Turtle Window ##########################
 
-def draw_spiral(sides, colorselect, colordrift):
+def draw_spiral(sides, colorselect, colordrift, dir_of_rot, degree_of_rot):
 
     ### Turtle Configuration -------------
     turtle.colormode(255)
@@ -101,7 +101,10 @@ def draw_spiral(sides, colorselect, colordrift):
         t.pencolor(color_r, color_g, color_b)
         t.forward(i * 3/sides + i)
         # degrees for a corner turn + 1 to make it spiral
-        t.left(360/sides + 1)   
+        if dir_of_rot == 'right':
+            t.right(360/sides + degree_of_rot)
+        else:
+            t.left(360/sides + degree_of_rot)
         t.width(i*sides/200)
         color_r = start_r + growth(start_r, rangemax, i) + noise(start_r)
         color_g = start_g + growth(start_g, rangemax, i) + noise(start_g)
@@ -126,7 +129,7 @@ def draw_spiral(sides, colorselect, colordrift):
 
 window = tk.Tk()
 window.title('Spiral Muse - Spiral Control')
-window.geometry('850x800')
+window.geometry('900x800')
 window.configure(bg=wincolor)
 
 # tkinter font configuration
@@ -157,20 +160,43 @@ frame_descript.grid(row=0, column=0,
                     sticky=tk.N
                     )
 
+# Create label as frame title
 tk.Label(frame_descript,
          text='Spiral Muse',
          bg=bgcolor2,
          height=1,      # height in lines, not pixels
          pady=5,
          font=Verd20
-         ).grid(row=0)
+         ).grid(row=0, columnspan=2)
 
+
+
+# Create and place 1st part of description
 description1 = (
     'Generate colored spiral designs (against a black background) '
     'starting with a base polygonal shape (triangle, square, '
     'pentagon, etc.) and a base color. The base polygonal shape '
     'is specified by the number of sides (3, 4, 5,...up to 10). \n'
 )
+mess_descript1 = tk.Message(master=frame_descript,
+                            text=description1,
+                            bg=bgcolor2,
+                            width=580,
+                            padx=5,
+                            font=Verd10
+                            )
+mess_descript1.grid(row=1, columnspan=2)
+
+# Create and place spiral image
+img = tk.PhotoImage(file = 'Green_Color_Spiral.png')
+small_img = tk.PhotoImage.subsample(img, x=5, y=5)
+tk.Label(frame_descript,
+         image=small_img,
+         bg=bgcolor2
+         ).grid(row=2, column=0)
+
+
+# Create 2nd part of description
 description2 = (
     '\nThe color can be allowed to DRIFT away from the base '
     'color as the spiral twists and expands outward, '
@@ -182,30 +208,14 @@ description2 = (
     'Regardless, a little amount of random variation is automatically '
     'added to the color, creating an organic look. '
 )
-mess_descript1 = tk.Message(master=frame_descript,
-                            text=description1,
-                            bg=bgcolor2,
-                            width=500,
-                            padx=5,
-                            font=Verd10
-                            )
-mess_descript1.grid(row=1)
-
-# Create and place spiral image
-img = tk.PhotoImage(file = 'Green_Color_Spiral.png')
-small_img = tk.PhotoImage.subsample(img, x=5, y=5)
-tk.Label(frame_descript,
-         image=small_img,
-         bg=bgcolor2
-         ).grid(row=2)
 mess_descript2 = tk.Message(master=frame_descript,
                             text=description2,
                             bg=bgcolor2,
-                            width=500,
+                            width=350,
                             padx=5,
                             font=Verd10
                             )
-mess_descript2.grid(row=3)
+mess_descript2.grid(row=2, column=1)
 
 
 ##### Sides Select Frame --------------------------
@@ -242,7 +252,7 @@ sidemessage = ('How many sides would you like for the base polygon? '
 mess1 = tk.Message(master=frame_sides,
                    text=sidemessage,
                    bg=bgcolor2,
-                   width=500,
+                   width=580,
                    padx=5,
                    font=Verd10
                    )
@@ -295,7 +305,7 @@ driftmessage = ('Determine color stability.  Select the amount to which the spir
 mess3 = tk.Message(master=frame_drift,
                    text=driftmessage,
                    bg=bgcolor2,
-                   width=500,
+                   width=580,
                    padx=5,
                    font=Verd10)
 mess3.grid(row=1, columnspan=2)
@@ -304,6 +314,69 @@ mess3.grid(row=1, columnspan=2)
 drift_entry = tk.Entry(frame_drift, width=2, font=Verd12)
 drift_entry.insert(0, str(colordrift))
 drift_entry.grid(row=0, column=1, sticky='W')
+
+
+##### Rotation Frame ---------------------------------------
+dir_of_rot = 'left'         # default value
+degree_of_rot = 1           # default value
+
+# Create frame
+frame_rot = tk.Frame(window,
+                     bg=bgcolor2,
+                     padx=10,
+                     pady=5,
+                     relief=tk.RIDGE,
+                     borderwidth=5
+                     )
+frame_rot.grid(row=3,
+               column=0,
+               padx=10,
+               pady=0
+               )
+
+# Create label as title
+tk.Label(frame_rot,
+         text='Direction of Rotation',
+         bg=bgcolor2,
+         height=1,      # height in lines, not in pixels
+         padx=10,
+         pady=5,
+         font=Verd14
+         ).grid(row=0, column=0, sticky=tk.E)
+tk.Label(frame_rot,
+         text='Degree of Rotation',
+         bg=bgcolor2,
+         height=1,      # height in lines, not in pixels
+         padx=10,
+         pady=5,
+         font=Verd14
+         ).grid(row=0, column=2, sticky=tk.E)
+
+
+# Create Direction of Rotation Entry
+dir_entry = tk.Entry(frame_rot, width=5, font=Verd12)
+dir_entry.insert(0, str(dir_of_rot))
+dir_entry.grid(row=0, column=1, padx=(0,20), sticky='W')
+
+# Create Degree of Rotation Entry
+deg_entry = tk.Entry(frame_rot, width=2, font=Verd12)
+deg_entry.insert(0, str(degree_of_rot))
+deg_entry.grid(row=0, column=3, sticky='W')
+
+# Add message
+rot_message = ('Select the direction of rotation, '
+               'either \'left\' or \'right\', and '
+               'the degree of rotation, an integer '
+               'number from 1 to 20.'
+               )
+mess_rot = tk.Message(master=frame_rot,
+                      text=rot_message,
+                      bg=bgcolor2,
+                      width=580,
+                      padx=5,
+                      font=Verd10
+                      )
+mess_rot.grid(row=1, columnspan=4)
 
 
 
@@ -318,7 +391,7 @@ frame_colorselect = tk.Frame(window,
                             relief=tk.RIDGE,
                             borderwidth=5
                             )
-frame_colorselect.grid(row=0, column=1, rowspan=4, pady=(10,0))
+frame_colorselect.grid(row=0, column=1, rowspan=5, pady=(10,0))
 
 # Create label as title
 tk.Label(frame_colorselect,
@@ -369,15 +442,16 @@ frame_proceed = tk.Frame(window,
                          pady=5,
                          relief=tk.RIDGE,
                          borderwidth=5)
-frame_proceed.grid(row=3, column=0, pady=0)
+frame_proceed.grid(row=4, column=0, pady=0)
 
 tk.Label(frame_proceed,
          text='Proceed with Drawing?',
          bg=bgcolor2,
          height=1,     # height in lines, not pixels
+         padx=0,
          pady=5,
          font=Verd14
-         ).pack(side=tk.TOP)
+         ).grid(row=0, column=0)
 
 
 
@@ -388,7 +462,10 @@ def proceed_submit():
     global sides
     global colorselect
     global colordrift
+    global dir_of_rot
+    global degree_of_rot
     global counter
+    
 
     if counter > 0:                   # Skips clear on 1st iteration
         turtle.Screen().clear()       # Deletes all drawings and turtles
@@ -426,12 +503,16 @@ Stability/Drift:\t{colordrift}
 '''
     
     box.showinfo('', mess_proceed)
-    draw_spiral(sides, colorselect, colordrift)
+    draw_spiral(sides, colorselect, colordrift, dir_of_rot, degree_of_rot)
 
 ### End Proceed Function
 
                          
-tk.Button(frame_proceed, text='Proceed', command=proceed_submit, font=Verd12).pack()
+tk.Button(frame_proceed,
+          text='Proceed',
+          command=proceed_submit,
+          font=Verd12
+          ).grid(row=0, column=1, padx=20)
 
 ##### End Proceed Frame -----------------------------------------
 
