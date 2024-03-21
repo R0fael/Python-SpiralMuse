@@ -109,6 +109,10 @@ def draw_spiral(sides, colorselect, colordrift):
         
         #print(color_r, color_g, color_b)       # For color performance analysis
 
+    # Draw half a leg to finish inside the spiral
+    # to hide ending
+    t.forward( ( (rangemax+1) * 3/sides + (rangemax+1) )/2 )
+
 
     turtle.done()
 
