@@ -134,6 +134,8 @@ Verd12 = Font(family="Verdana", size=12, weight="normal")
 Verd14 = Font(family="Verdana", size=14, weight="bold")
 Verd20 = Font(family="Verdana", size=20, weight="bold")
 
+window.option_add('*Dialog.msg.font', 'Verdana 12')
+
 
 # Description Frame
 
@@ -354,11 +356,13 @@ def proceed_submit():
     # Exception handling for stability/drift
     colordrift = drift_entry.get()
     if not colordrift.isdigit():
-        box.showwarning('', 'The stability/drift entry must be an integer.  Select again.')
+        box.showwarning(title='Selections',
+                        message='The stability/drift entry must be an integer.  Select again.')
         return
     colordrift = int(colordrift)
     if colordrift < 2 or colordrift > 8:
-        box.showwarning('', 'The stability/drift selection is out of range.  Select again.')
+        box.showwarning(title='Selections',
+                        message='The stability/drift selection is out of range.  Select again.')
         return
 
     mess_proceed = f'''Your Selection is...\t\t\t
