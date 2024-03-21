@@ -125,9 +125,10 @@ window.geometry('850x800')
 window.configure(bg=wincolor)
 
 # tkinter Configuration
-font1 = ('Arial', '12', 'bold')
-font2 = ('Times', '12' , 'normal')
-font3 = ('Times New Roman', 12, 'bold')
+Arial10 = Font(family="Arial", size=10, weight="normal")
+Arial11 = Font(family="Arial", size=11, weight="normal")
+Arial12 = Font(family="Arial", size=12, weight="normal")
+Arial20 = Font(family="Arial", size=20, weight="bold")
 Verd10 = Font(family="Verdana", size=10, weight="normal")
 Verd12 = Font(family="Verdana", size=12, weight="normal")
 Verd14 = Font(family="Verdana", size=14, weight="bold")
