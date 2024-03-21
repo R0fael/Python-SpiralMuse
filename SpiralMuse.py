@@ -120,7 +120,7 @@ def draw_spiral(sides, colorselect, colordrift):
 ## tkinter window to interact
 
 window = tk.Tk()
-window.title('Spiral Control')
+window.title('Spiral Muse - Spiral Control')
 window.geometry('850x800')
 window.configure(bg=wincolor)
 
