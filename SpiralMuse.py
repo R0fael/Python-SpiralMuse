@@ -2,6 +2,7 @@
 import turtle
 import tkinter as tk
 import tkinter.messagebox as box
+from tkinter.font import Font
 import random
 
 
@@ -126,7 +127,11 @@ window.configure(bg=wincolor)
 # tkinter Configuration
 font1 = ('Arial', '12', 'bold')
 font2 = ('Times', '12' , 'normal')
-font3 = ('calibre', 10, 'normal')
+font3 = ('Times New Roman', 12, 'bold')
+Verd10 = Font(family="Verdana", size=10, weight="normal")
+Verd12 = Font(family="Verdana", size=12, weight="normal")
+Verd14 = Font(family="Verdana", size=14, weight="bold")
+Verd20 = Font(family="Verdana", size=20, weight="bold")
 
 
 # Description Frame
@@ -140,7 +145,7 @@ frame_descript.grid(row=0, column=0, padx=10, pady=(10,0), sticky=tk.N)
 tk.Label(frame_descript,
          text='Spiral Muse', bg=bgcolor2, height=1,      # height in lines, not pixels
          pady=5,
-         font=font1).grid(row=0)
+         font=Verd20).grid(row=0)
 
 description1 = (
     'Generate colored spiral designs (against a black background) '
@@ -163,7 +168,8 @@ mess_descript1 = tk.Message(master=frame_descript,
             text=description1,
             bg=bgcolor2,
             width=500,
-            padx=5)
+            padx=5,
+            font=Verd10)
 mess_descript1.grid(row=1)
 
 img = tk.PhotoImage(file = 'Green_Color_Spiral.png')
@@ -174,7 +180,8 @@ mess_descript2 = tk.Message(master=frame_descript,
             text=description2,
             bg=bgcolor2,
             width=500,
-            padx=5)
+            padx=5,
+            font=Verd10)
 mess_descript2.grid(row=3)
 
 
@@ -189,7 +196,7 @@ frame_sides.grid(row=1, column=0, padx=10, pady=0)
 tk.Label(frame_sides,
          text='Base Polygon Sides', bg=bgcolor2, height=1,      # height in lines, not pixels
          padx=10, pady=5,
-         font=font1).grid(row=0, column=0, sticky=tk.E)
+         font=Verd14).grid(row=0, column=0, sticky=tk.E)
 sidemessage = ('How many sides would you like for the base polygon? '
                'Select a number from 3 to 10.'
 )
@@ -197,7 +204,8 @@ mess1 = tk.Message(master=frame_sides,
             text=sidemessage,
             bg=bgcolor2,
             width=500,
-            padx=5)
+            padx=5,
+            font=Verd10)
 mess1.grid(row=1, columnspan=2)
 
 
@@ -208,7 +216,7 @@ mess1.grid(row=1, columnspan=2)
 ##    print("The number of sides is: " + sides)
 ##    
 
-sides_entry = tk.Entry(frame_sides, width=2)
+sides_entry = tk.Entry(frame_sides, width=2, font=Verd12)
 sides_entry.insert(0, str(sides))
 ##sides_btn = tk.Button(frame_sides, text='Submit', command=sides_submit)
 
@@ -228,7 +236,7 @@ frame_drift.grid(row=2, column=0, padx=10, pady=0)
 tk.Label(frame_drift,
          text='Color Drift', bg=bgcolor2, height=1,     # height in lines, not pixels
          padx=10, pady=5,
-         font=font1).grid(row=0, column=0, sticky=tk.E)
+         font=Verd14).grid(row=0, column=0, sticky=tk.E)
 driftmessage = ('Determine color stability.  Select the amount to which the spiral color '
                 'is prevented from '
                 'drifting away from the base color, where 8 represents a lot of stability '
@@ -238,7 +246,8 @@ mess3 = tk.Message(master=frame_drift,
                    text=driftmessage,
                    bg=bgcolor2,
                    width=500,
-                   padx=5)
+                   padx=5,
+                   font=Verd10)
 mess3.grid(row=1, columnspan=2)
 
 ##def drift_submit():
@@ -248,7 +257,7 @@ mess3.grid(row=1, columnspan=2)
 ##    print("The color drift is: " + colordrift)
 ##    window.quit()
 
-drift_entry = tk.Entry(frame_drift, width=2)
+drift_entry = tk.Entry(frame_drift, width=2, font=Verd12)
 drift_entry.insert(0, str(colordrift))
 ##drift_btn = tk.Button(frame_drift, text='Submit', command=drift_submit)
 
@@ -263,16 +272,23 @@ colorselect = 'medium purple'
 
 frame_colorselect = tk.Frame(window,
                             bg=bgcolor2,
-                             padx=10, pady=25, relief=tk.RIDGE, borderwidth=5)
+                            padx=10, pady=5, relief=tk.RIDGE, borderwidth=5)
 frame_colorselect.grid(row=0, column=1, rowspan=4, pady=(10,0))
 tk.Label(frame_colorselect,
          text='Base Polygon Color', bg=bgcolor2, height=1,     # height in lines, not pixels
          pady=5,
-         font=('Arial', '12', 'bold')).pack(side=tk.TOP)
-colormessage = 'Select a base (inner) color for the spiral.\nDefault (highlighted in white)\n is the last one.\n'
-label2 = tk.Label(master=frame_colorselect,
-                  text=colormessage, bg=bgcolor2, pady=5).pack()
-listbox = tk.Listbox(frame_colorselect, selectbackground='ghost white', height=len(colors), borderwidth=5)
+         font=Verd14).pack(side=tk.TOP)
+colormessage = 'Select a base (inner) color for the spiral. The default (highlighted in white) is the last one.'
+mess_colorselect = tk.Message(master=frame_colorselect,
+                  text=colormessage, bg=bgcolor2,
+                  width=200,
+                  pady=5,
+                  font=Verd10).pack()
+listbox = tk.Listbox(frame_colorselect,
+                     selectbackground='ghost white',
+                     height=len(colors),
+                     borderwidth=5,
+                     font=Verd10)
 
 for i, key in enumerate(colors.keys()):
     listbox.insert(i, '  ' + key)
@@ -304,7 +320,7 @@ frame_proceed.grid(row=3, column=0, pady=0)
 tk.Label(frame_proceed,
          text='Proceed with Drawing?', bg=bgcolor2, height=1,     # height in lines, not pixels
          pady=5,
-         font=('Arial', '12', 'bold')).pack(side=tk.TOP)
+         font=Verd14).pack(side=tk.TOP)
 
 
 ##### Proceed Function #####
@@ -355,7 +371,7 @@ Stability/Drift:\t{colordrift}
 
 ##### End Proceed Function #####
                          
-tk.Button(frame_proceed, text='Proceed', command=proceed_submit).pack()
+tk.Button(frame_proceed, text='Proceed', command=proceed_submit, font=Verd12).pack()
 
 ##### End Proceed Frame #####
 
