@@ -419,7 +419,9 @@ listbox = tk.Listbox(frame_colorselect,
                      selectbackground='ghost white',
                      height=len(colors),
                      borderwidth=5,
-                     font=Verd10
+                     font=Verd10,
+                     # keep listbox selection from being deselected by other selections
+                     exportselection=False    
                      )
 
 # Add items to listbox
@@ -482,7 +484,8 @@ def proceed_submit():
         return
     
     # Getting color
-    colorselect = str(listbox.get(listbox.curselection())).strip()
+    colorselect = listbox.get(listbox.curselection()).strip()
+
 
     # Exception handling for stability/drift
     colordrift = drift_entry.get()
@@ -496,10 +499,33 @@ def proceed_submit():
                         message='The stability/drift selection is out of range.  Select again.')
         return
 
+    # Exception handling for direction of rotation
+    dir_of_rot = dir_entry.get()
+    if not (dir_of_rot == 'left' or dir_of_rot == 'right'):
+        box.showwarning(title='Selections',
+                        message=('The Direction of Rotation entry must be either '
+                                '\'left\' or \'right\'.  Select again.')
+                        )
+        return
+
+    # Exception handling for degree of rotation
+    degree_of_rot = deg_entry.get().strip()
+    if not degree_of_rot.isdigit():
+        box.showwarning(title='Selections',
+                        message='The Degree of Rotation entry must be an integer.  Select again.')
+        return
+    degree_of_rot = int(degree_of_rot)
+    if degree_of_rot < 1 or degree_of_rot > 20:
+        box.showwarning(title='Selections',
+                        message='The Degree of Rotation is out of range.  Select again.')
+        return
+
     mess_proceed = f'''Your Selection is...\t\t\t
+Base Color:\t{colorselect}
 Sides:\t\t{sides}
-Base Color:  {colorselect}
 Stability/Drift:\t{colordrift}
+Direction of Rotation:\t{dir_of_rot}
+Degree of Rotation:\t{degree_of_rot}
 '''
     
     box.showinfo('', mess_proceed)
