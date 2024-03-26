@@ -176,7 +176,7 @@ description1 = (
     'Generate colored spiral designs (against a black background) '
     'starting with a base polygonal shape (triangle, square, '
     'pentagon, etc.) and a base color. The base polygonal shape '
-    'is specified by the number of sides (3, 4, 5,...up to 10). \n'
+    'is specified by the number of sides (3, 4, 5,...up to 10).'
 )
 mess_descript1 = tk.Message(master=frame_descript,
                             text=description1,
@@ -198,7 +198,7 @@ tk.Label(frame_descript,
 
 # Create 2nd part of description
 description2 = (
-    '\nThe color can be allowed to DRIFT away from the base '
+    'The color can be allowed to DRIFT away from the base '
     'color as the spiral twists and expands outward, '
     'creating an unfolding effect. '
     'This can be set using an integer number '
